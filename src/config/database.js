@@ -2,7 +2,7 @@
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+dotenv.config({ path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env' });
 const dbUrl = process.env.MONGODB_URI || 'mongodb://localhost/CRUD';
 exports.connectDatabase = () => {
   // Connecting to the database

@@ -78,7 +78,6 @@ describe('Events', () => {
         body: 'This is a event body',
       });
       event.save((err, event) => {
-        console.log(event.id);
         chai
           .request(app)
           .put(`/api/events/${event.id}`)
@@ -101,8 +100,6 @@ describe('Events', () => {
       const event = new Event({
         title: 'This is the first event',
         body: 'This is a event body',
-        image:
-          'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
       });
       event.save((err, event) => {
         chai
