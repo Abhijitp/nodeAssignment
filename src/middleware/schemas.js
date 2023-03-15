@@ -29,8 +29,8 @@ module.exports.eventSchema = Joi.object({
 });
 
 module.exports.userSchema = Joi.object({
-  first_name: Joi.string().required().escapeHTML(),
-  last_name: Joi.string().required().escapeHTML(),
+  firstName: Joi.string().required().escapeHTML(),
+  lastName: Joi.string().required().escapeHTML(),
   email: Joi.string().required().escapeHTML(),
   password: Joi.string().required().escapeHTML(),
 });

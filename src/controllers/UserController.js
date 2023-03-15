@@ -14,13 +14,8 @@ exports.register = async (req, res) => {
     }
     // Get user input
     const {
-      first_name, last_name, email, password,
+      firstName, lastName, email, password,
     } = req.body;
-
-    // Validate user input
-    if (!(email && password && first_name && last_name)) {
-      res.status(400).send('All input is required');
-    }
 
     // check if user already exist
     // Validate if user exist in our database
@@ -35,15 +30,15 @@ exports.register = async (req, res) => {
 
     // Create user in our database
     const user = await User.create({
-      first_name,
-      last_name,
+      firstName,
+      lastName,
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       password: encryptedPassword,
     });
 
     // Create token
     const token = jwt.sign(
-      { user_id: user._id, email },
+      { pubId: user.pubId, email },
       process.env.TOKEN_KEY || 'mysecret',
       {
         expiresIn: '2h',
@@ -70,24 +65,23 @@ exports.login = async (req, res) => {
     }
     // Validate if user exist in our database
     const user = await User.findOne({ email });
-
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
       const token = jwt.sign(
-        { user_id: user._id, email },
+        { pubId: user.pubId, email },
         process.env.TOKEN_KEY || 'mysecret',
         {
           expiresIn: '10h',
         },
       );
-
       // save user token
       user.token = token;
 
       // user
       res.status(200).json(user);
+    } else {
+      res.status(400).send('Invalid Credentials');
     }
-    res.status(400).send('Invalid Credentials');
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

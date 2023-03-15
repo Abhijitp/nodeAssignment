@@ -1,12 +1,18 @@
 const mongoose = require('mongoose');
+const { v4: uuid } = require('uuid');
 
 const userSchema = new mongoose.Schema(
   {
-    first_name: {
+    pubId: {
+      type: String,
+      default: () => uuid(),
+      index: { unique: true },
+    },
+    firstName: {
       type: String,
       default: null,
     },
-    last_name: {
+    lastName: {
       type: String,
       default: null,
     },
