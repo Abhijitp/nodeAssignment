@@ -5,7 +5,7 @@ const {
 } = require('mocha');
 const chaiHttp = require('chai-http');
 const Event = require('../src/models/Event');
-const app = require('../src/app');
+const app = require('../src/driver/app');
 
 chai.should();
 
@@ -83,7 +83,7 @@ describe('Events', () => {
           .put(`/api/events/${event.id}`)
           .send({
             title: 'The first event was updated',
-            body: 'This is a event body'
+            body: 'This is a event body',
           })
           .end((res) => {
             res.should.have.status(200);

@@ -1,5 +1,5 @@
 const EventService = require('../services/EventService');
-const { eventSchema } = require('../schemas');
+const { eventSchema } = require('../middleware/schemas');
 const AppError = require('../utils/AppError');
 
 exports.getAllEvents = async (req, res) => {
