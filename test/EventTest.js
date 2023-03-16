@@ -1,11 +1,14 @@
-process.env.NODE_ENV = 'testing';
-const chai = require('chai');
-const {
+import chai from 'chai';
+import {
   describe, it, before, afterEach,
-} = require('mocha');
-const chaiHttp = require('chai-http');
-const Event = require('../src/models/Event');
-const app = require('../src/driver/app');
+} from 'mocha';
+
+import chaiHttp from 'chai-http';
+
+import Event from '../src/models/Event.js';
+import app from '../src/driver/app.js';
+
+process.env.NODE_ENV = 'testing';
 
 chai.should();
 

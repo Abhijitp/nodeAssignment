@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const { userSchema } = require('../middleware/schemas');
-const AppError = require('../utils/AppError');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
+import { userSchema } from '../middleware/schemas.js';
+import AppError from '../utils/AppError.js';
 
-exports.register = async (req, res) => {
+const register = async (req, res) => {
   try {
     const { error } = userSchema.validate(req.body);
     if (error) {
@@ -53,8 +53,7 @@ exports.register = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-
-exports.login = async (req, res) => {
+const login = async (req, res) => {
   try {
     // Get user input
     const { email, password } = req.body;
@@ -86,3 +85,5 @@ exports.login = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export default { login, register };

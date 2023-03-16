@@ -1,10 +1,14 @@
-const EventModel = require('../models/Event');
+import EventModel from '../models/Event.js';
 
-exports.getAllEvents = async () => EventModel.find();
+const getAllEvents = async () => EventModel.find();
 
-exports.createEvent = async (event) => EventModel.create(event);
-exports.getEventById = async (id) => EventModel.findById(id);
+const createEvent = async (event) => EventModel.create(event);
+const getEventById = async (id) => EventModel.findById(id);
 
-exports.updateEvent = async (id, event) => EventModel.findByIdAndUpdate(id, event);
+const updateEvent = async (id, event) => EventModel.findByIdAndUpdate(id, event);
 
-exports.deleteEvent = async (id) => EventModel.findByIdAndDelete(id);
+const deleteEvent = async (id) => EventModel.findByIdAndDelete(id);
+
+export default {
+  getAllEvents, createEvent, getEventById, updateEvent, deleteEvent,
+};

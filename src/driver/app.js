@@ -1,14 +1,17 @@
-const express = require('express');
+import express from 'express';
+import connectDatabase from '../dbConnection/database.js';
+
+import eventRouter from '../routes/EventRoute.js';
+import AppError from '../utils/AppError.js';
+
+import userRouter from '../routes/UserRoute.js';
+
+connectDatabase();
 
 const app = express();
-require('../dbConnection/database').connectDatabase();
-const AppError = require('../utils/AppError');
 
 // middleware
 app.use(express.json());
-
-const eventRouter = require('../routes/EventRoute');
-const userRouter = require('../routes/UserRoute');
 
 app.use('/api/events', eventRouter);
 app.use('/api/users', userRouter);
@@ -28,4 +31,4 @@ app.listen(3001, () => {
   console.log('Server is running on port 3001');
 });
 
-module.exports = app;
+export default app;

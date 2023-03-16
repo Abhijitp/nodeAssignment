@@ -1,5 +1,5 @@
-const BaseJoi = require('joi');
-const sanitizeHtml = require('sanitize-html');
+import BaseJoi from 'joi';
+import sanitizeHtml from 'sanitize-html';
 
 const extension = (joi) => ({
   type: 'string',
@@ -23,12 +23,12 @@ const extension = (joi) => ({
 
 const Joi = BaseJoi.extend(extension);
 
-module.exports.eventSchema = Joi.object({
+export const eventSchema = Joi.object({
   title: Joi.string().required().escapeHTML(),
   body: Joi.string().required().escapeHTML(),
 });
 
-module.exports.userSchema = Joi.object({
+export const userSchema = Joi.object({
   firstName: Joi.string().required().escapeHTML(),
   lastName: Joi.string().required().escapeHTML(),
   email: Joi.string().required().escapeHTML(),

@@ -1,21 +1,14 @@
-const express = require('express');
-const verifyToken = require('../middleware/auth');
-const catchAsync = require('../utils/catchAsync');
-
-const {
-  getAllEvents,
-  createEvent,
-  getEventById,
-  updateEvent,
-  deleteEvent,
-} = require('../controllers/EventController');
+import express from 'express';
+import verifyToken from '../middleware/auth.js';
+import catchAsync from '../utils/catchAsync.js';
+import controller from '../controllers/EventController.js';
 
 const router = express.Router();
 
-router.get('/', verifyToken, catchAsync(getAllEvents));
-router.post('/', verifyToken, catchAsync(createEvent));
-router.get('/:id', verifyToken, catchAsync(getEventById));
-router.put('/:id', verifyToken, catchAsync(updateEvent));
-router.delete('/:id', verifyToken, catchAsync(deleteEvent));
+router.get('/', verifyToken, catchAsync(controller.getAllEvents));
+router.post('/', verifyToken, catchAsync(controller.createEvent));
+router.get('/:id', verifyToken, catchAsync(controller.getEventById));
+router.put('/:id', verifyToken, catchAsync(controller.updateEvent));
+router.delete('/:id', verifyToken, catchAsync(controller.deleteEvent));
 
-module.exports = router;
+export default router;

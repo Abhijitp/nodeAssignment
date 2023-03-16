@@ -1,11 +1,12 @@
 // configure mongoose
-const dotenv = require('dotenv');
-const mongoose = require('mongoose');
-const config = require('../config/config');
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import config from '../config/config.js';
 
 dotenv.config({ path: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env' });
-const dbUrl = config.MONGO_URL || 'mongodb://localhost/CRUD';
-exports.connectDatabase = () => {
+const dbUrl = config.mongo.url || 'mongodb://localhost/CRUD';
+
+const connectDatabase = () => {
   // Connecting to the database
   mongoose
     .connect(dbUrl)
@@ -18,3 +19,5 @@ exports.connectDatabase = () => {
       process.exit(1);
     });
 };
+
+export default connectDatabase;
